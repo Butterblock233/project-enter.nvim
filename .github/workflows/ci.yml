@@ -5,6 +5,8 @@ on: [push]
 jobs:
   lint:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - name: Stylua
@@ -12,18 +14,26 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
-          args: --check .
+          args: .
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "style: auto format code"
+          commit_user_name: "github-actions[bot]"
+          commit_user_email: "github-actions[bot]@users.noreply.github.com"
+          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
 
   docs:
     runs-on: ubuntu-latest
     name: pandoc to vimdoc
+    permissions:
+      contents: write
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v3
       - name: panvimdoc
         uses: kdheepak/panvimdoc@main
         with:
-          vimdoc: nvim-plugin-template.nvim
+          vimdoc: project-enter.nvim
           treesitter: true
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
