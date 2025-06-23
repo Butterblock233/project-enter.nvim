@@ -11,10 +11,14 @@ jobs:
       - uses: actions/checkout@v3
       - name: Stylua
         uses: JohnnyMorganz/stylua-action@v3
+        if: github.event_name != 'workflow_dispatch'  
+        # 仅在 GitHub 环境中运行，跳过本地 act 运行时的鉴权问题，需要在后续版本修复。
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
           args: .
+        # 注意：在本地运行 act 时，由于无法访问 GITHUB_TOKEN，会导致鉴权错误。
+        # 将来可能需要更新鉴权模式，例如使用环境变量或其他方式模拟令牌。
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "style: auto format code"
@@ -35,6 +39,8 @@ jobs:
         with:
           vimdoc: project-enter.nvim
           treesitter: true
+      - name: Pull latest changes
+        run: git pull origin main
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore(doc): auto generate docs"
