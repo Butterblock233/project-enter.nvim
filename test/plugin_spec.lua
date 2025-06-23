@@ -1,4 +1,4 @@
-local example = require('nvim-plugin-template').example
+local example = require('project-enter').example
 
 describe('neovim plugin', function()
 	it('work as expect', function()

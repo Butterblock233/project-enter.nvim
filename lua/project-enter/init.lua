@@ -126,4 +126,10 @@ function M.trigger()
 	end
 end
 
+--- Basic Test(Still WIP)
+-- @return boolean Always returns true.
+function M.example()
+	return true
+end
+
 return M
