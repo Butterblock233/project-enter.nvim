@@ -1,0 +1,107 @@
+*project-enter.nvim*    For Neovim, triggers an event on project entry.
+
+==============================================================================
+CONTENTS                                       *project-enter.nvim-contents*
+
+  1. Introduction....................|project-enter.nvim-introduction|
+  2. Installation..................|project-enter.nvim-installation|
+  3. Usage...................................|project-enter.nvim-usage|
+  4. Configuration...............|project-enter.nvim-configuration|
+  5. Debugging.........................|project-enter.nvim-debugging|
+
+==============================================================================
+INTRODUCTION                                 *project-enter.nvim-introduction*
+
+`project-enter.nvim` is a lightweight plugin that detects when you enter a
+project directory and triggers a custom `User` event. Its primary use case is
+to conditionally load other plugins with `lazy.nvim` based on the project
+type (e.g., loading Rust plugins only when a `cargo.toml` is present).
+
+The plugin automatically finds the project root by searching upwards for
+common markers like `.git`.
+
+==============================================================================
+INSTALLATION                               *project-enter.nvim-installation*
+
+Install with your favorite plugin manager.
+
+Using |lazy.nvim|:
+>lua
+  {
+    "Butterblock233/project-enter.nvim",
+    -- No configuration needed for basic usage
+  }
+<
+==============================================================================
+USAGE                                              *project-enter.nvim-usage*
+
+The main way to use this plugin is with the `event` trigger in `lazy.nvim`.
+The event format is `"User ProjectEnter <filename>"`.
+
+Example: Conditionally load `rust-tools.nvim` only in Rust projects.
+>lua
+  {
+    "simrat39/rust-tools.nvim",
+    event = "User ProjectEnter cargo.toml",
+    -- other config...
+  }
+<
+Example: Load `typescript.nvim` in TypeScript projects.
+>lua
+  {
+    "jose-elias-alvarez/typescript.nvim",
+    event = "User ProjectEnter package.json",
+    -- other config...
+  }
+<
+When you open a file inside a project containing `cargo.toml` or
+`package.json` in its root, the corresponding `User ProjectEnter` event will
+be fired, and `lazy.nvim` will load the plugin.
+
+==============================================================================
+CONFIGURATION                                *project-enter.nvim-configuration*
+
+You can configure the plugin by calling the `setup()` function.
+
+Default configuration:
+>lua
+  require("project-enter").setup({
+    root_markers = {
+      ['.git'] = 'directory',
+      ['init.lua'] = 'file',
+    },
+  })
+<
+                                                *project-enter.nvim-setup()*
+`setup()` accepts a table to override the default settings.
+
+`root_markers`                                *project-enter.nvim-root_markers*
+  A table that defines what files or directories mark a project root.
+  - The key is the name of the file or directory (e.g., `'.git'`).
+  - The value is the type, either `'file'` or `'directory'`.
+
+Example: Add `.project` file and `_darcs` directory as root markers.
+>lua
+  require("project-enter").setup({
+    root_markers = {
+      ['.git'] = 'directory',
+      ['init.lua'] = 'file',
+      ['.project'] = 'file',
+      ['_darcs'] = 'directory',
+    },
+  })
+<
+==============================================================================
+DEBUGGING                                      *project-enter.nvim-debugging*
+
+To enable debug messages, set the `DEBUG` environment variable to `"true"`
+before starting Neovim.
+
+>sh
+  DEBUG=true nvim
+<
+The plugin will then print detailed information about its execution, such as
+the detected project root and the events being triggered.
+
+==============================================================================
+vim:tw=78:ts=8:sw=4:sts=4:et:ft=help:norl:
