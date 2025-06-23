@@ -4,8 +4,7 @@
 
 ## ✨ 特性
 
-- 根据可配置的标记（如 `.git`、`init.lua`）自动检测项目根目录。
-- 当在项目根目录中找到特定文件时，触发 `User ProjectEnter <文件名>` 事件。
+- 根据可配置的标记（如 `.git`、`init.lua`）自动检测项目根目录。并触发 `User ProjectEnter <文件名>` 事件。
 - 基础用法无需任何配置。
 - 提供调试模式，方便排查问题。
 
@@ -24,15 +23,15 @@
 
 ## 🚀 用法
 
-该插件主要与 `lazy.nvim` 的 `event` 触发器配合使用。事件格式为 `"User ProjectEnter <文件名>"`.
+该插件主要与 `lazy.nvim` 的 `event` 触发器配合使用。事件格式为 `"User ProjectEnter <Pattern>"`。`<Pattern>` 可以是文件或目录。
 
-**示例**：仅在 Rust 项目中加载 `rust-tools.nvim`。
+**示例**：仅在 Git 存储库中加载 `gitsigns.nvim`。
 
 ```lua
 {
-  "simrat39/rust-tools.nvim",
-  event = "User ProjectEnter cargo.toml",
-  -- 其他配置...
+  "lewis6991/gitsigns.nvim",
+  event = "User ProjectEnter .git",
+  -- other configs...
 }
 ```
 
@@ -40,21 +39,19 @@
 
 ```lua
 {
-	"benomahony/uv.nvim",
-	cond = true,
-	event = "User ProjectEnter pyproject.toml",
-	-- opts = {},
-},
-
+  "benomahony/uv.nvim",
+  cond = true,
+  event = "User ProjectEnter pyproject.toml",
+  -- opts = {},
+}
 ```
 
-当您在项目根目录包含 `cargo.toml` 或 `package.json` 的项目中打开文件时，相应的 `User ProjectEnter` 事件将被触发，`lazy.nvim` 将加载对应的插件。
+当您在项目根目录包含 `.git` 或 `pyproject.toml` 的项目中打开文件时，相应的 `User ProjectEnter` 事件将被触发，`lazy.nvim` 将加载对应的插件。
 
 ## ⚙️ 配置
 
 > [!Caution]
 > 这部分还在施工中，正常情况下，这个插件不需要额外配置。
-
 
 您可以通过调用 `setup()` 函数来配置该插件。
 
@@ -90,7 +87,7 @@ require("project-enter").setup({
 
 ## 🐛 调试
 
-要启用调试信息，请在启动 Neovim 之前将环境变量 `DEBUG`(或`vim.env.DEBUG`) 设置为 `"true"`。
+要启用调试信息，请在启动 Neovim 之前将环境变量 `DEBUG` (或 `vim.env.DEBUG`) 设置为 `"true"`。
 
 ```sh
 DEBUG=true nvim

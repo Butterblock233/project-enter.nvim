@@ -18,42 +18,41 @@ Install with your favorite plugin manager.
 ```lua
 {
   "Butterblock233/project-enter.nvim",
+  event = "VeryLazy" -- Make sure the plugin can load properly
   -- No configuration needed for basic usage
 }
 ```
 
 ## 🚀 Usage
 
-The main way to use this plugin is with the `event` trigger in `lazy.nvim`. The event format is `"User ProjectEnter <filename>"`.
+The main way to use this plugin is with the `event` trigger in `lazy.nvim`. The event format is `"User ProjectEnter <Pattern>"`. `<Pattern>` can be either a file or a directory.
 
-**Example**: Conditionally load `rust-tools.nvim` only in Rust projects.
+**Example**: Conditionally load `git-signs.nvim` only in git repositories.
 
 ```lua
 {
-  "simrat39/rust-tools.nvim",
-  event = "User ProjectEnter cargo.toml",
-  -- other config...
+  "lewis6991/gitsigns.nvim",
+  event = "User ProjectEnter .git",
+  -- other configs...
 }
 ```
 
 **Example**: Load `uv.nvim` in Python projects.
 
-
 ```lua
 {
-	"benomahony/uv.nvim",
-	cond = true,
-	event = "User ProjectEnter pyproject.toml",
-	-- opts = {},
-},
-
+  "benomahony/uv.nvim",
+  cond = true,
+  event = "User ProjectEnter pyproject.toml",
+  -- opts = {},
+}
 ```
 
-When you open a file inside a project containing `cargo.toml` or `package.json` in its root, the corresponding `User ProjectEnter` event will be fired, and `lazy.nvim` will load the plugin.
+When you open a file inside a project containing `.git` or `pyproject.toml` in its root, the corresponding `User ProjectEnter` event will be fired, and `lazy.nvim` will load the plugin.
 
 ## ⚙️ Configuration
 > [!Caution]
-> This Part is still WIP. Normally, this puglin does not need extra configurations
+> This Part is still WIP. Normally, this plugin does not need extra configurations
 
 You can configure the plugin by calling the `setup()` function.
 
@@ -89,7 +88,7 @@ require("project-enter").setup({
 
 ## 🐛 Debugging
 
-To enable debug messages, set the `DEBUG`(or `vim.env.DEBUG`) environment variable to `"true"` before starting Neovim.
+To enable debug messages, set the `DEBUG` (or `vim.env.DEBUG`) environment variable to `"true"` before starting Neovim.
 
 ```sh
 DEBUG=true nvim
