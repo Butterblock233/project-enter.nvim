@@ -36,14 +36,17 @@ The main way to use this plugin is with the `event` trigger in `lazy.nvim`. The 
 }
 ```
 
-**Example**: Load `typescript.nvim` in TypeScript projects.
+**Example**: Load `uv.nvim` in Python projects.
+
 
 ```lua
 {
-  "jose-elias-alvarez/typescript.nvim",
-  event = "User ProjectEnter package.json",
-  -- other config...
-}
+	"benomahony/uv.nvim",
+	cond = true,
+	event = "User ProjectEnter pyproject.toml",
+	-- opts = {},
+},
+
 ```
 
 When you open a file inside a project containing `cargo.toml` or `package.json` in its root, the corresponding `User ProjectEnter` event will be fired, and `lazy.nvim` will load the plugin.

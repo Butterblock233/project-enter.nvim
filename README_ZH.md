@@ -39,12 +39,12 @@
 **示例**：在 Python 项目中加载 `uv.nvim`。
 
 ```lua
-	{
-		"benomahony/uv.nvim",
-		cond = true,
-		event = "User ProjectEnter pyproject.toml",
-		-- opts = {},
-	},
+{
+	"benomahony/uv.nvim",
+	cond = true,
+	event = "User ProjectEnter pyproject.toml",
+	-- opts = {},
+},
 
 ```
 
