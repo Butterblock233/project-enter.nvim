@@ -1,4 +1,4 @@
-*project-enter.nvim.txt*       For NVIM v0.8.0       Last change: 2025 June 23
+*project-enter.nvim.txt*       For NVIM v0.8.0       Last change: 2025 June 29
 
 ==============================================================================
 Table of Contents                       *project-enter.nvim-table-of-contents*
@@ -21,7 +21,7 @@ plugins with `lazy.nvim` based on the project type.
 ✨ FEATURES              *project-enter.nvim-project-enter.nvim-✨-features*
 
 - Automatically detects project root based on configurable markers (e.g., `.git`, `init.lua`).
-- Triggers a `User ProjectEnter <filename>` event when a specific file is found in the project root.
+- Triggers a `User ProjectEnter <Pattern>` event when a specific file is found in the project root.
 - Zero-config required for basic usage.
 - Debug mode for easy troubleshooting.
 
