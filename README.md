@@ -5,7 +5,7 @@ A lightweight Neovim plugin that detects when you enter a project and triggers a
 ## ✨ Features
 
 - Automatically detects project root based on configurable markers (e.g., `.git`, `init.lua`).
-- Triggers a `User ProjectEnter <filename>` event when a specific file is found in the project root.
+- Triggers a `User ProjectEnter <Pattern>` event when a specific file is found in the project root.
 - Zero-config required for basic usage.
 - Debug mode for easy troubleshooting.
 

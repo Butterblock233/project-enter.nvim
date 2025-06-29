@@ -1,10 +1,11 @@
 # project-enter.nvim
 
-一个轻量级的 Neovim 插件，它能检测您何时进入一个项目，并触发一个自定义的 `User` 事件。其主要用途是与 `lazy.nvim` 配合，根据项目类型来按需加载其他插件。
+一个轻量级的 Neovim 插件，它能检测您何时进入一个项目，并触发一个自定义的 `User ProjectEnter <Pattern>` 事件。其主要用途是与 `lazy.nvim` 配合，根据项目类型来按需加载其他插件。
+
 
 ## ✨ 特性
 
-- 根据可配置的标记（如 `.git`、`init.lua`）自动检测项目根目录。并触发 `User ProjectEnter <文件名>` 事件。
+- 根据可配置的标记（如 `.git`、`Makefile`）自动检测项目根目录。并触发 `User ProjectEnter <Pattern>` 事件。
 - 基础用法无需任何配置。
 - 提供调试模式，方便排查问题。
 
