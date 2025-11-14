@@ -1,4 +1,4 @@
-*project-enter.nvim.txt*       For NVIM v0.8.0       Last change: 2025 June 29
+*project-enter.nvim.txt*     For NVIM v0.8.0     Last change: 2025 November 14
 
 ==============================================================================
 Table of Contents                       *project-enter.nvim-table-of-contents*
@@ -7,15 +7,14 @@ Table of Contents                       *project-enter.nvim-table-of-contents*
   - ✨ Features          |project-enter.nvim-project-enter.nvim-✨-features|
   - 📦 Installation|project-enter.nvim-project-enter.nvim-📦-installation|
   - 🚀 Usage              |project-enter.nvim-project-enter.nvim-🚀-usage|
-  - ⚙️ Configuration|project-enter.nvim-project-enter.nvim-⚙️-configuration|
   - 🐛 Debugging      |project-enter.nvim-project-enter.nvim-🐛-debugging|
 
 ==============================================================================
 1. project-enter.nvim                  *project-enter.nvim-project-enter.nvim*
 
-A lightweight Neovim plugin that detects when you enter a project and triggers
-a custom `User` event. Its primary use case is to conditionally load other
-plugins with `lazy.nvim` based on the project type.
+A lightweight Neovim plugin which provides a simple event for `lazy.nvim` to
+load plugins based on files or folders in your project. For example, you can
+load `venv-selecter` plugin only `.venv` folder exists.
 
 
 ✨ FEATURES              *project-enter.nvim-project-enter.nvim-✨-features*
@@ -31,7 +30,7 @@ plugins with `lazy.nvim` based on the project type.
 Install with your favorite plugin manager.
 
 
-LAZY.NVIM ~
+LAZY.NVIM (RECOMMEND) ~
 
 >lua
     {
@@ -72,45 +71,6 @@ file or a directory.
 When you open a file inside a project containing `.git` or `pyproject.toml` in
 its root, the corresponding `User ProjectEnter` event will be fired, and
 `lazy.nvim` will load the plugin.
-
-
-⚙️ CONFIGURATION*project-enter.nvim-project-enter.nvim-⚙️-configuration*
-
-
-  [!Caution] This Part is still WIP. Normally, this plugin does not need extra
-  configurations
-You can configure the plugin by calling the `setup()` function.
-
-**Default configuration**:
-
->lua
-    require("project-enter").setup({
-      root_markers = {
-        ['.git'] = 'directory',
-        ['init.lua'] = 'file',
-      },
-    })
-<
-
-
-ROOT_MARKERS ~
-
-A table that defines what files or directories mark a project root. - The key
-is the name of the file or directory (e.g., `'.git'`). - The value is the type,
-either `'file'` or `'directory'`.
-
-**Example**: Add `.project` file and `_darcs` directory as root markers.
-
->lua
-    require("project-enter").setup({
-      root_markers = {
-        ['.git'] = 'directory',
-        ['init.lua'] = 'file',
-        ['.project'] = 'file',
-        ['_darcs'] = 'directory',
-      },
-    })
-<
 
 
 🐛 DEBUGGING          *project-enter.nvim-project-enter.nvim-🐛-debugging*
