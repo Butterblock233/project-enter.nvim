@@ -1,6 +1,6 @@
 # project-enter.nvim
 
-A lightweight Neovim plugin that detects when you enter a project and triggers a custom `User` event. Its primary use case is to conditionally load other plugins with `lazy.nvim` based on the project type.
+A lightweight Neovim plugin which provides a simple event for `lazy.nvim` to load plugins based on files or folders in your project. For example, you can load `venv-selecter` plugin only `.venv` folder exists.
 
 ## ✨ Features
 
@@ -13,7 +13,7 @@ A lightweight Neovim plugin that detects when you enter a project and triggers a
 
 Install with your favorite plugin manager.
 
-### [lazy.nvim](https://github.com/folke/lazy.nvim)
+### [lazy.nvim](https://github.com/folke/lazy.nvim) (Recommend)
 
 ```lua
 {
@@ -50,41 +50,6 @@ The main way to use this plugin is with the `event` trigger in `lazy.nvim`. The 
 
 When you open a file inside a project containing `.git` or `pyproject.toml` in its root, the corresponding `User ProjectEnter` event will be fired, and `lazy.nvim` will load the plugin.
 
-## ⚙️ Configuration
-> [!Caution]
-> This Part is still WIP. Normally, this plugin does not need extra configurations
-
-You can configure the plugin by calling the `setup()` function.
-
-**Default configuration**:
-
-```lua
-require("project-enter").setup({
-  root_markers = {
-    ['.git'] = 'directory',
-    ['init.lua'] = 'file',
-  },
-})
-```
-
-### `root_markers`
-
-A table that defines what files or directories mark a project root.
-- The key is the name of the file or directory (e.g., `'.git'`).
-- The value is the type, either `'file'` or `'directory'`.
-
-**Example**: Add `.project` file and `_darcs` directory as root markers.
-
-```lua
-require("project-enter").setup({
-  root_markers = {
-    ['.git'] = 'directory',
-    ['init.lua'] = 'file',
-    ['.project'] = 'file',
-    ['_darcs'] = 'directory',
-  },
-})
-```
 
 ## 🐛 Debugging
 
